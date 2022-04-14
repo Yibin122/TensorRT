@@ -8,7 +8,7 @@
 
 #include "NvInferRuntime.h"
 
-cudnnStatus_t convert_trt2cudnn_dtype(nvinfer1::DataType trt_dtype, cudnnDataType_t* cudnn_dtype);
+cudnnStatus_t convert_trt2cudnn_dtype(nvinfer1::DataType trt_dtype, cudnnDataType_t *cudnn_dtype);
 
 // // Enumerator for status
 // typedef enum {
@@ -48,76 +48,76 @@ cudnnStatus_t convert_trt2cudnn_dtype(nvinfer1::DataType trt_dtype, cudnnDataTyp
     if (s_ != 0) std::cerr << __FILE__ << ", " << __LINE__ << ", " << s_ << std::endl; \
   }
 
-// #ifndef DEBUG
+#ifndef DEBUG
 
-// #define CHECK(status)         \
-//   do {                        \
-//     if (status != 0) abort(); \
-//   } while (0)
+#define CHECK(status)         \
+  do {                        \
+    if (status != 0) abort(); \
+  } while (0)
 
-// #define ASSERT_PARAM(exp)                \
-//   do {                                   \
-//     if (!(exp)) return STATUS_BAD_PARAM; \
-//   } while (0)
+#define ASSERT_PARAM(exp)                \
+  do {                                   \
+    if (!(exp)) return STATUS_BAD_PARAM; \
+  } while (0)
 
-// #define ASSERT_FAILURE(exp)            \
-//   do {                                 \
-//     if (!(exp)) return STATUS_FAILURE; \
-//   } while (0)
+#define ASSERT_FAILURE(exp)            \
+  do {                                 \
+    if (!(exp)) return STATUS_FAILURE; \
+  } while (0)
 
-// #define CSC(call, err)               \
-//   do {                               \
-//     cudaError_t cudaStatus = call;   \
-//     if (cudaStatus != cudaSuccess) { \
-//       return err;                    \
-//     }                                \
-//   } while (0)
+#define CSC(call, err)               \
+  do {                               \
+    cudaError_t cudaStatus = call;   \
+    if (cudaStatus != cudaSuccess) { \
+      return err;                    \
+    }                                \
+  } while (0)
 
-// #define DEBUG_PRINTF(...) \
-//   do {                    \
-//   } while (0)
+#define DEBUG_PRINTF(...) \
+  do {                    \
+  } while (0)
 
-// #else
+#else
 
-// #define ASSERT_PARAM(exp)                                                   \
-//   do {                                                                      \
-//     if (!(exp)) {                                                           \
-//       fprintf(stderr, "Bad param - " #exp ", %s:%d\n", __FILE__, __LINE__); \
-//       return STATUS_BAD_PARAM;                                              \
-//     }                                                                       \
-//   } while (0)
+#define ASSERT_PARAM(exp)                                                   \
+  do {                                                                      \
+    if (!(exp)) {                                                           \
+      fprintf(stderr, "Bad param - " #exp ", %s:%d\n", __FILE__, __LINE__); \
+      return STATUS_BAD_PARAM;                                              \
+    }                                                                       \
+  } while (0)
 
-// #define ASSERT_FAILURE(exp)                                               \
-//   do {                                                                    \
-//     if (!(exp)) {                                                         \
-//       fprintf(stderr, "Failure - " #exp ", %s:%d\n", __FILE__, __LINE__); \
-//       return STATUS_FAILURE;                                              \
-//     }                                                                     \
-//   } while (0)
+#define ASSERT_FAILURE(exp)                                               \
+  do {                                                                    \
+    if (!(exp)) {                                                         \
+      fprintf(stderr, "Failure - " #exp ", %s:%d\n", __FILE__, __LINE__); \
+      return STATUS_FAILURE;                                              \
+    }                                                                     \
+  } while (0)
 
-// #define CSC(call, err)                                                                    \
-//   do {                                                                                    \
-//     cudaError_t cudaStatus = call;                                                        \
-//     if (cudaStatus != cudaSuccess) {                                                      \
-//       printf("%s %d CUDA FAIL %s\n", __FILE__, __LINE__, cudaGetErrorString(cudaStatus)); \
-//       return err;                                                                         \
-//     }                                                                                     \
-//   } while (0)
+#define CSC(call, err)                                                                    \
+  do {                                                                                    \
+    cudaError_t cudaStatus = call;                                                        \
+    if (cudaStatus != cudaSuccess) {                                                      \
+      printf("%s %d CUDA FAIL %s\n", __FILE__, __LINE__, cudaGetErrorString(cudaStatus)); \
+      return err;                                                                         \
+    }                                                                                     \
+  } while (0)
 
-// #define CHECK(status)                                                                       \
-//   {                                                                                         \
-//     if (status != 0) {                                                                      \
-//       DEBUG_PRINTF("%s %d CUDA FAIL %s\n", __FILE__, __LINE__, cudaGetErrorString(status)); \
-//       abort();                                                                              \
-//     }                                                                                       \
-//   }
+#define CHECK(status)                                                                       \
+  {                                                                                         \
+    if (status != 0) {                                                                      \
+      DEBUG_PRINTF("%s %d CUDA FAIL %s\n", __FILE__, __LINE__, cudaGetErrorString(status)); \
+      abort();                                                                              \
+    }                                                                                       \
+  }
 
-// #define DEBUG_PRINTF(...) \
-//   do {                    \
-//     printf(__VA_ARGS__);  \
-//   } while (0)
+#define DEBUG_PRINTF(...) \
+  do {                    \
+    printf(__VA_ARGS__);  \
+  } while (0)
 
-// #endif
+#endif
 
 namespace mmdeploy {
 
