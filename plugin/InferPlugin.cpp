@@ -54,6 +54,7 @@ using namespace nvinfer1::plugin;
 #include "specialSlicePlugin.h"
 #include "split.h"
 #include "scatterPlugin.h"
+#include "trt_modulated_deform_conv.hpp"
 
 using nvinfer1::plugin::RPROIParams;
 
@@ -195,6 +196,7 @@ extern "C"
         initializePlugin<nvinfer1::plugin::ScatterNDPluginCreator>(logger, libNamespace);
         initializePlugin<nvinfer1::plugin::SpecialSlicePluginCreator>(logger, libNamespace);
         initializePlugin<nvinfer1::plugin::SplitPluginCreator>(logger, libNamespace);
+        initializePlugin<mmdeploy::ModulatedDeformableConvPluginDynamicCreator>(logger, libNamespace);
         return true;
     }
 } // extern "C"
