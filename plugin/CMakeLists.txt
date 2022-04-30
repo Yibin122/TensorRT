@@ -58,6 +58,7 @@ set(PLUGIN_LISTS
     specialSlicePlugin
     splitPlugin
     modulatedDeformConvPlugin
+    deformConvPlugin
     )
 
 # Add BERT sources if ${BERT_GENCODES} was populated
